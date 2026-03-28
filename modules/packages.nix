@@ -25,7 +25,7 @@
     ast-grep
     codex
     tmux
-    neofetch
+    fastfetch
 
     # Infrastructure & cloud
     awscli2

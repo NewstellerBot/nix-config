@@ -46,4 +46,15 @@
     };
     loginwindow.GuestEnabled = false;
   };
+
+  system.defaults.CustomUserPreferences = {
+    "net.imput.helium" = {
+      DefaultSearchProviderEnabled = true;
+      DefaultSearchProviderName = "DuckDuckGo";
+      DefaultSearchProviderSearchURL = "https://duckduckgo.com/?q={searchTerms}";
+      DefaultSearchProviderSuggestURL = "https://duckduckgo.com/ac/?q={searchTerms}&type=list";
+      HomepageLocation = "https://news.ycombinator.com";
+      HomepageIsNewTabPage = false;
+    };
+  };
 }

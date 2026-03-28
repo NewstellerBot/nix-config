@@ -6,6 +6,17 @@
       show-recents = false;
       mru-spaces = false;
       minimize-to-application = true;
+      persistent-apps = [
+        "/System/Applications/Launchpad.app"
+        "/System/Applications/Messages.app"
+        "/Applications/Ghostty.app"
+        "/System/Applications/Calendar.app"
+        "/Applications/Slack.app"
+        "/Applications/Discord.app"
+        "/Applications/Spotify.app"
+        "/Applications/Helium Browser.app"
+        "/Applications/Telegram.app"
+      ];
     };
     finder = {
       AppleShowAllExtensions = true;

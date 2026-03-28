@@ -17,18 +17,4 @@
   home.file.".config/karabiner".source =
     config.lib.file.mkOutOfStoreSymlink "/etc/nix-darwin/configs/karabiner";
 
-  # Dock apps via dockutil — Finder is always pinned by macOS
-  home.activation.configureDock = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    dock="${pkgs.dockutil}/bin/dockutil"
-    $dock --remove all --no-restart
-    $dock --add /System/Applications/Launchpad.app --no-restart
-    $dock --add /System/Applications/Messages.app --no-restart
-    $dock --add /Applications/Ghostty.app --no-restart
-    $dock --add /System/Applications/Calendar.app --no-restart
-    $dock --add /Applications/Slack.app --no-restart
-    $dock --add /Applications/Discord.app --no-restart
-    $dock --add /Applications/Spotify.app --no-restart
-    $dock --add "/Applications/Helium Browser.app" --no-restart
-    $dock --add /Applications/Telegram.app
-  '';
 }

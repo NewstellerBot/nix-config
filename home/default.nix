@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }: {
   imports = [ ./shell.nix ./git.nix ./tmux.nix ./direnv.nix ./claude.nix ./ghostty.nix ];
 
-  home.stateVersion = "24.11";
+  home.stateVersion = "25.05";
 
   # Nvim: nix store symlink (read-only — packer_compiled.lua redirected to ~/.local/share/nvim/)
   home.file.".config/nvim".source = ../configs/nvim;

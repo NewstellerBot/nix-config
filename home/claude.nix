@@ -15,7 +15,7 @@
   # Then install LSP plugins — all idempotent
   home.activation.claudeCode = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     if [ ! -x "$HOME/.local/bin/claude" ]; then
-      PATH="${pkgs.curl}/bin:$PATH" run ${pkgs.curl}/bin/curl -fsSL https://claude.ai/install.sh | PATH="${pkgs.curl}/bin:$PATH" ${pkgs.bash}/bin/bash
+      PATH="${pkgs.curl}/bin:/usr/bin:/bin:$PATH" run ${pkgs.curl}/bin/curl -fsSL https://claude.ai/install.sh | PATH="${pkgs.curl}/bin:/usr/bin:/bin:$PATH" ${pkgs.bash}/bin/bash
     fi
 
     claude="$HOME/.local/bin/claude"

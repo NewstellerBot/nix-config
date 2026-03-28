@@ -13,8 +13,13 @@
   # Undo directory for persistent undo history
   home.file.".vim/undodir/.keep".text = "";
 
-  # Karabiner: mutable symlink (GUI needs write access to save config changes)
-  home.file.".config/karabiner".source =
-    config.lib.file.mkOutOfStoreSymlink "/etc/nix-darwin/configs/karabiner";
+  # Karabiner: copy (not symlink) — Karabiner destroys symlinks on every config save
+  # GUI changes are lost on next rebuild; copy them back to the repo to persist
+  home.activation.karabiner = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    mkdir -p "$HOME/.config/karabiner"
+    cp -f ${../configs/karabiner/karabiner.json} "$HOME/.config/karabiner/karabiner.json"
+    chmod 644 "$HOME/.config/karabiner/karabiner.json"
+    /bin/launchctl kickstart -k gui/$(/usr/bin/id -u)/org.pqrs.karabiner.karabiner_console_user_server 2>/dev/null || true
+  '';
 
 }

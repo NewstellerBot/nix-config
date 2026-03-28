@@ -30,6 +30,8 @@
     # Infrastructure & cloud
     awscli2
     docker
+    railway
+    postgresql
 
     # Media & misc
     yt-dlp

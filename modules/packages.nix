@@ -39,6 +39,9 @@
     qemu
     hey
 
+    # Treesitter (needed by nvim-treesitter to build parsers)
+    tree-sitter
+
     # Python tooling
     uv
 

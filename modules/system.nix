@@ -37,8 +37,8 @@
       NSAutomaticQuoteSubstitutionEnabled = false;
     };
     trackpad = {
-      Clicking = true;
-      TrackpadThreeFingerDrag = true;
+      Clicking = false;
+      TrackpadThreeFingerDrag = false;
     };
     screencapture = {
       location = "~/Desktop/Screenshots";

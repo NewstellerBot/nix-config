@@ -15,6 +15,7 @@
       "slack"
       "spotify"
       "steam"
+      "tailscale"
       "telegram"
       "transmission"
       "virtualdj"

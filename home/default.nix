@@ -2,8 +2,6 @@
   imports = [ ./shell.nix ./git.nix ./tmux.nix ./direnv.nix ./claude.nix ];
 
   home.stateVersion = "24.11";
-  home.username = "krystian";
-  home.homeDirectory = "/Users/krystian";
 
   # Nvim: nix store symlink (read-only — packer_compiled.lua redirected to ~/.local/share/nvim/)
   home.file.".config/nvim".source = ../configs/nvim;

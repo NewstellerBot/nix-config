@@ -4,4 +4,9 @@
   system.stateVersion = 6;
   system.primaryUser = "krystian";
   nix.settings.experimental-features = "nix-command flakes";
+
+  users.users.krystian = {
+    name = "krystian";
+    home = "/Users/krystian";
+  };
 }

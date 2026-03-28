@@ -13,11 +13,6 @@
     rustup
     zig
 
-    # Build tools
-    cmake
-    ninja
-    llvm
-
     # CLI tools
     ripgrep
     fd
@@ -25,7 +20,6 @@
     wget
     gh
     lazygit
-    act
     cloc
     hyperfine
     ast-grep
@@ -36,22 +30,12 @@
     # Infrastructure & cloud
     awscli2
     docker
-    supabase-cli
-    railway
-    s3fs
-    postgresql
 
     # Media & misc
     yt-dlp
     imagemagick
     qemu
-    lz4
-    e2fsprogs
-    raylib
     hey
-
-    # Debugging
-    gdb
 
     # Python tooling
     uv

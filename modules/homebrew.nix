@@ -20,13 +20,5 @@
       "virtualdj"
       "visual-studio-code"
     ];
-    brews = [
-      "autoconf"
-      "autoconf-archive"
-      "automake"
-      "librealsense"
-      "pkg-config"
-      "qt"
-    ];
   };
 }

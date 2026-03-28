@@ -5,6 +5,7 @@
 
   # Use symlinks instead of rsync for ~/Applications (copyApps has permission bugs)
   targets.darwin.linkApps.enable = true;
+  targets.darwin.copyApps.enable = false;
 
   # Nvim: nix store symlink (read-only — packer_compiled.lua redirected to ~/.local/share/nvim/)
   home.file.".config/nvim".source = ../configs/nvim;

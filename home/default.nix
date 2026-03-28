@@ -3,6 +3,9 @@
 
   home.stateVersion = "25.11";
 
+  # Use symlinks instead of rsync for ~/Applications (copyApps has permission bugs)
+  targets.darwin.linkApps.enable = true;
+
   # Nvim: nix store symlink (read-only — packer_compiled.lua redirected to ~/.local/share/nvim/)
   home.file.".config/nvim".source = ../configs/nvim;
 

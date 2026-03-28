@@ -26,6 +26,20 @@
     darwinConfigurations."krystians-MacBook-Pro" = nix-darwin.lib.darwinSystem {
       specialArgs = { inherit self; };
       modules = [
+        # Temporary overlay: fix direnv build on darwin (nixpkgs-unstable regression)
+        # Remove once nixpkgs-unstable includes PR #502769
+        {
+          nixpkgs.overlays = [
+            (final: prev: {
+              direnv = prev.direnv.overrideAttrs (old: {
+                postPatch = (old.postPatch or "") + ''
+                  substituteInPlace GNUmakefile --replace-fail " -linkmode=external" ""
+                '';
+              });
+            })
+          ];
+        }
+
         ./hosts/krystians-MacBook-Pro.nix
         ./modules/packages.nix
         ./modules/homebrew.nix

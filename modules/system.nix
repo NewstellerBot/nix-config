@@ -7,14 +7,15 @@
       mru-spaces = false;
       minimize-to-application = true;
       persistent-apps = [
-        "/System/Applications/Launchpad.app"
+        "/System/Applications/Mail.app"
+        "/System/Applications/Apps.app"
         "/System/Applications/Messages.app"
         "/Applications/Ghostty.app"
         "/System/Applications/Calendar.app"
         "/Applications/Slack.app"
         "/Applications/Discord.app"
         "/Applications/Spotify.app"
-        "/Applications/Helium Browser.app"
+        "/Applications/Helium.app"
         "/Applications/Telegram.app"
       ];
     };

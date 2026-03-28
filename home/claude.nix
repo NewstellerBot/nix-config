@@ -1,15 +1,13 @@
 { lib, pkgs, ... }: {
-  programs.claude-code = {
-    enable = true;
-    settings = {
-      permissions = {
-        allow = [
-          "Bash(git *)"
-          "Read"
-          "Glob"
-          "Grep"
-        ];
-      };
+  # Claude Code settings (installed via native installer, not nixpkgs)
+  home.file.".claude/settings.json".text = builtins.toJSON {
+    permissions = {
+      allow = [
+        "Bash(git *)"
+        "Read"
+        "Glob"
+        "Grep"
+      ];
     };
   };
 

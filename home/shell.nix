@@ -18,7 +18,7 @@
       DISABLE_TELEMETRY = "1";
       CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS = "1";
     };
-    initExtra = ''
+    initContent = ''
       export PATH="$HOME/.local/bin:$PATH"
       export PATH="$HOME/.cargo/bin:$PATH"
     '';

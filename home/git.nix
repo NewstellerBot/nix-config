@@ -1,13 +1,13 @@
 { ... }: {
   programs.git = {
     enable = true;
-    # Default identity: NewstellerBot
-    userName = "NewstellerBot";
-    userEmail = "kr21032002@icloud.com";
-    delta.enable = true;
-    lfs.enable = true;
     ignores = [ ".DS_Store" "*.swp" ".direnv" ];
-    extraConfig = {
+    lfs.enable = true;
+    settings = {
+      user = {
+        name = "NewstellerBot";
+        email = "kr21032002@icloud.com";
+      };
       core.editor = "nvim";
       credential."https://github.com".helper = "!/run/current-system/sw/bin/gh auth git-credential";
       credential."https://gist.github.com".helper = "!/run/current-system/sw/bin/gh auth git-credential";
@@ -15,7 +15,6 @@
       push.autoSetupRemote = true;
       pull.rebase = true;
     };
-    # Switch to personal identity for futre repos
     includes = [
       {
         condition = "gitdir:~/code/futre/";
@@ -25,5 +24,10 @@
         };
       }
     ];
+  };
+
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
   };
 }

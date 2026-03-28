@@ -33,7 +33,7 @@
             (final: prev: {
               direnv = prev.direnv.overrideAttrs (old: {
                 postPatch = (old.postPatch or "") + ''
-                  substituteInPlace GNUmakefile --replace-fail " -linkmode=external" ""
+                  sed -i '/GO_LDFLAGS += -linkmode=external/d' GNUmakefile
                 '';
               });
             })

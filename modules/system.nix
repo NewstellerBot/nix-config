@@ -1,4 +1,5 @@
 { ... }: {
+  power.sleep.display = 15;
   system.defaults = {
     dock = {
       autohide = true;

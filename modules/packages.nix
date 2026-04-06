@@ -36,6 +36,9 @@
     railway
     postgresql
 
+    # Fonts
+    iosevka
+
     # Media & misc
     yt-dlp
     imagemagick

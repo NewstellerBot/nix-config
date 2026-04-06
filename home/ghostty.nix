@@ -12,7 +12,7 @@
       ];
       theme = "Oxocarbon";
       background-opacity = 0.85;
-      font-family = "Berkeley Mono";
+      font-family = "Iosevka Term";
       shell-integration-features = "ssh-env,no-cursor";
     };
   };

@@ -10,7 +10,6 @@
       "helium-browser"
       "karabiner-elements"
       "macfuse"
-      "nordvpn"
       "orbstack"
       "slack"
       "spotify"
@@ -18,8 +17,9 @@
       "tailscale-app"
       "telegram"
       "transmission"
-      "virtualdj"
+      "rekordbox"
       "visual-studio-code"
+      "whatsapp"
     ];
   };
 }

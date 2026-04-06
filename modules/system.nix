@@ -51,9 +51,9 @@
   system.defaults.CustomUserPreferences = {
     "net.imput.helium" = {
       DefaultSearchProviderEnabled = true;
-      DefaultSearchProviderName = "DuckDuckGo";
-      DefaultSearchProviderSearchURL = "https://duckduckgo.com/?q={searchTerms}";
-      DefaultSearchProviderSuggestURL = "https://duckduckgo.com/ac/?q={searchTerms}&type=list";
+      DefaultSearchProviderName = "Google";
+      DefaultSearchProviderSearchURL = "https://google.com/search?q={searchTerms}";
+      DefaultSearchProviderSuggestURL = "https://google.com/complete/search?client=chrome&q={searchTerms}";
       HomepageLocation = "https://news.ycombinator.com";
       HomepageIsNewTabPage = false;
     };

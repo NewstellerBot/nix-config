@@ -6,7 +6,10 @@
     settings = {
       cursor-style = "block";
       cursor-style-blink = true;
-      keybind = "shift+enter=text:\\n";
+      keybind = [
+        "shift+enter=text:\\n"
+        "alt+backspace=text:\\x1b\\x7f"
+      ];
       theme = "Oxocarbon";
       background-opacity = 0.85;
       font-family = "Berkeley Mono";

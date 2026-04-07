@@ -53,7 +53,7 @@
 
     # LSP servers (for Claude Code plugins)
     pyright
-    nodePackages.typescript-language-server
+    typescript-language-server
     typescript
   ];
 }

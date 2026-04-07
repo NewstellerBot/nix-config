@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
   environment.systemPackages = with pkgs; [
     # Editors
     vim
@@ -26,6 +26,9 @@
     codex
     tmux
     fastfetch
+
+    # Google Workspace CLI
+    inputs.google-workspace-cli.packages.${pkgs.stdenv.hostPlatform.system}.default
 
     # Infrastructure & cloud
     awscli2

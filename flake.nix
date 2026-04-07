@@ -19,12 +19,15 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
+
+    google-workspace-cli.url = "github:googleworkspace/cli";
+    google-workspace-cli.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, nix-homebrew, homebrew-core, homebrew-cask, ... }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, nix-homebrew, homebrew-core, homebrew-cask, google-workspace-cli, ... }:
   {
     darwinConfigurations."krystians-MacBook-Pro" = nix-darwin.lib.darwinSystem {
-      specialArgs = { inherit self; };
+      specialArgs = { inherit self inputs; };
       modules = [
         # Temporary overlay: fix direnv build on darwin (nixpkgs-unstable regression)
         # Remove once nixpkgs-unstable includes PR #502769

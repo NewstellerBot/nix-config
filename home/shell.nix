@@ -17,6 +17,7 @@
       DISABLE_ERROR_REPORTING = "1";
       DISABLE_TELEMETRY = "1";
       CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS = "1";
+      CLAUDE_CODE_EFFORT_LEVEL = "max";
     };
     initContent = ''
       export PATH="$HOME/.local/bin:$PATH"

@@ -11,7 +11,7 @@
     bun
     go
     rustup
-    zig
+    inputs.zig-overlay.packages.${pkgs.stdenv.hostPlatform.system}.default
 
     # CLI tools
     ripgrep

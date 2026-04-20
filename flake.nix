@@ -22,6 +22,9 @@
 
     google-workspace-cli.url = "github:googleworkspace/cli";
     google-workspace-cli.inputs.nixpkgs.follows = "nixpkgs";
+
+    zig-overlay.url = "github:mitchellh/zig-overlay";
+    zig-overlay.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, nix-homebrew, homebrew-core, homebrew-cask, google-workspace-cli, ... }:

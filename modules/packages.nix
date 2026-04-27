@@ -25,6 +25,7 @@
     ast-grep
     tmux
     fastfetch
+    dvc
 
     # Google Workspace CLI
     inputs.google-workspace-cli.packages.${pkgs.stdenv.hostPlatform.system}.default

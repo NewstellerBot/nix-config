@@ -2,10 +2,6 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Reasoning
-
-Think carefully and step-by-step before responding; assume the problem is harder than it looks. Prioritize correctness and maintainability over brevity. Verify APIs and package names against documentation rather than guessing. If you don't know something, say so and search — don't assume. If a request is ambiguous, ask before acting.
-
 ## Build / apply
 
 Single-host nix-darwin flake. The only host is `krystians-MacBook-Pro` (aarch64-darwin).

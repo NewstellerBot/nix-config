@@ -1,4 +1,12 @@
 { lib, pkgs, ... }: {
+  # User-scope CLAUDE.md — loaded for every Claude Code session.
+  # Counters a few Claude 4.7 defaults (brevity bias, "attempt now, don't interview").
+  home.file.".claude/CLAUDE.md".text = ''
+    # Reasoning
+
+    Think carefully and step-by-step before responding; assume the problem is harder than it looks. Prioritize correctness and maintainability over brevity. Verify APIs and package names against documentation rather than guessing. If you don't know something, say so and search — don't assume. If a request is ambiguous, ask before acting.
+  '';
+
   # Claude Code settings (installed via native installer, not nixpkgs)
   home.file.".claude/settings.json".text = builtins.toJSON {
     permissions = {

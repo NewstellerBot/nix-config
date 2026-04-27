@@ -1,5 +1,5 @@
 { config, lib, pkgs, ... }: {
-  imports = [ ./shell.nix ./git.nix ./tmux.nix ./direnv.nix ./claude.nix ./ghostty.nix ];
+  imports = [ ./shell.nix ./git.nix ./tmux.nix ./direnv.nix ./claude.nix ./codex.nix ./ghostty.nix ];
 
   home.stateVersion = "25.11";
 

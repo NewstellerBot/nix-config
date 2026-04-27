@@ -23,7 +23,6 @@
     cloc
     hyperfine
     ast-grep
-    codex
     tmux
     fastfetch
 

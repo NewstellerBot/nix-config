@@ -17,7 +17,8 @@
       DISABLE_ERROR_REPORTING = "1";
       DISABLE_TELEMETRY = "1";
       CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS = "1";
-      CLAUDE_CODE_EFFORT_LEVEL = "max";
+      # CLAUDE_CODE_EFFORT_LEVEL intentionally unset: any value overrides the
+      # session effort and disables ultracode (enabled in home/claude.nix).
     };
     initContent = ''
       export PATH="$HOME/.local/bin:$PATH"

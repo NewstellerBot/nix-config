@@ -1,7 +1,6 @@
 { pkgs, inputs, ... }: {
   environment.systemPackages = with pkgs; [
     # Editors
-    vim
     neovim
 
     # Languages & runtimes
@@ -32,6 +31,7 @@
 
     # Infrastructure & cloud
     awscli2
+    google-cloud-sdk
     docker
     railway
     postgresql

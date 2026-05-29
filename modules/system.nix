@@ -1,5 +1,14 @@
-{ ... }: {
-  power.sleep.display = 15;
+{ lib, ... }: {
+  power.sleep.display = "never";
+
+  # `power.sleep.display` runs `systemsetup -setDisplaySleep`, which on modern
+  # macOS only writes the AC profile — set the battery profile explicitly so
+  # the screen never sleeps regardless of power source. Appended to the
+  # existing `power` activation script (custom names are ignored by nix-darwin).
+  system.activationScripts.power.text = lib.mkAfter ''
+    /usr/bin/pmset -b displaysleep 0
+  '';
+
   system.defaults = {
     dock = {
       autohide = true;

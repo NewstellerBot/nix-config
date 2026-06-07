@@ -22,7 +22,8 @@ When researching try using industry blog posts, reddit, and research papers rath
       ];
     };
     model = "claude-opus-4-8[1m]";
-    effortLevel = "ultracode";
+    effortLevel = "xhigh";
+    ultracode = true;
     includeCoAuthoredBy = false;
     skipDangerousModePermissionPrompt = true;
     enabledPlugins = {

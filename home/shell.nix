@@ -17,8 +17,9 @@
       DISABLE_ERROR_REPORTING = "1";
       DISABLE_TELEMETRY = "1";
       CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS = "1";
-      # CLAUDE_CODE_EFFORT_LEVEL intentionally unset: any value overrides the
-      # session effort and disables ultracode (enabled in home/claude.nix).
+      # CLAUDE_CODE_EFFORT_LEVEL intentionally unset: xhigh is a valid effortLevel
+      # value, so it persists via the settings.json key in home/claude.nix. The env
+      # var is only needed to force `max` (session-only, not a valid enum value).
     };
     initContent = ''
       export PATH="$HOME/.local/bin:$PATH"

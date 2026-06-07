@@ -22,16 +22,7 @@ When researching try using industry blog posts, reddit, and research papers rath
       ];
     };
     model = "claude-opus-4-8[1m]";
-    # ultracode = xhigh effort + standing dynamic-workflow orchestration on every
-    # substantive task. It's a first-class settings key (verified in the 2.1.156
-    # binary), read from the merged settings object — no --settings flag or binary
-    # patching needed. effortLevel is only the fallback for when ultracode is
-    # toggled off mid-session via /effort; "max" was NOT a valid effortLevel value
-    # (the enum is low|medium|high|xhigh) so the previous setting was silently
-    # ignored. NOTE: CLAUDE_CODE_EFFORT_LEVEL (any value) overrides this and
-    # disables ultracode, so it must stay unset — see home/shell.nix.
-    effortLevel = "xhigh";
-    ultracode = true;
+    effortLevel = "ultracode";
     includeCoAuthoredBy = false;
     skipDangerousModePermissionPrompt = true;
     enabledPlugins = {

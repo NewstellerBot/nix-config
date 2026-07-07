@@ -28,8 +28,10 @@
   };
 
   outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, nix-homebrew, homebrew-core, homebrew-cask, google-workspace-cli, ... }:
-  {
-    darwinConfigurations."krystians-MacBook-Pro" = nix-darwin.lib.darwinSystem {
+  let
+    # host: nix-darwin module with per-machine identity (hostnames)
+    # home: home-manager entry point (per-host wrapper around ./home)
+    mkHost = { host, home }: nix-darwin.lib.darwinSystem {
       specialArgs = { inherit self inputs; };
       modules = [
         # Temporary overlay: fix direnv build on darwin (nixpkgs-unstable regression)
@@ -46,7 +48,8 @@
           ];
         }
 
-        ./hosts/krystians-MacBook-Pro.nix
+        ./hosts/common.nix
+        host
         ./modules/packages.nix
         ./modules/homebrew.nix
         ./modules/system.nix
@@ -57,7 +60,7 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.backupFileExtension = "hm-backup";
-          home-manager.users.krystian = import ./home;
+          home-manager.users.krystian = import home;
         }
 
         nix-homebrew.darwinModules.nix-homebrew
@@ -73,6 +76,17 @@
           };
         }
       ];
+    };
+  in
+  {
+    darwinConfigurations."krystians-MacBook-Pro" = mkHost {
+      host = ./hosts/personal.nix;
+      home = ./home/personal.nix;
+    };
+
+    darwinConfigurations."krystians-Work-MacBook-Pro" = mkHost {
+      host = ./hosts/work.nix;
+      home = ./home/work.nix;
     };
   };
 }

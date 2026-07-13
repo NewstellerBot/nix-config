@@ -3,6 +3,12 @@
 {
   imports = [ ./default.nix ];
 
+  # Work-only Claude Code skill: /ticket-loop orchestrates implement-ticket →
+  # PR → fresh-session review rounds. Depends on the futre repo's project
+  # skills, so it stays off the personal host.
+  home.file.".claude/skills/ticket-loop/SKILL.md".source =
+    ../configs/claude/skills/ticket-loop/SKILL.md;
+
   my.claude = {
     extraPlugins = [
       "slack@claude-plugins-official"

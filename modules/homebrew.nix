@@ -20,6 +20,7 @@
       "rekordbox"
       "visual-studio-code"
       "whatsapp"
+      "signal"
     ];
   };
 }

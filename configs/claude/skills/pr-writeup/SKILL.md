@@ -26,7 +26,10 @@ Rewrite the description of PR `$ARGUMENTS` (default: the PR for the current bran
 
 ## Apply
 
-- Write the final body to a file, then `gh pr edit <n> --body-file <file>`.
+- Write the final body to a file, then update the PR via the REST API:
+  `gh api repos/{owner}/{repo}/pulls/<n> --method PATCH -F body=@<file>`
+  (gh resolves `{owner}`/`{repo}` from the repo automatically). Do **not** use `gh pr edit --body-file` — it fails on repos that still reference deprecated GitHub Projects-classic fields, silently leaving the template unfilled.
+- **Verify it took before reporting success:** re-read `gh pr view <n> --json body` and confirm your content is there. Never claim the description was filled without confirming — a failed update must be reported as a failure, not glossed over.
 - Report the PR url. **Description edit only** — do not mark the PR ready for review, merge, close, or comment on it.
 
 ## Guardrails

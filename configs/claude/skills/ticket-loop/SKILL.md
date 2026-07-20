@@ -54,9 +54,13 @@ Track the round counter explicitly: state "round X of N" and the reviewer's verd
 4. **Fix.** Address the agreed findings. Run the relevant tests, typecheck, and lint before every push — never push a broken round. Commit and push to the same branch so the PR updates.
 5. **Leave a trail — in the run directory, never on the PR.** Write `round-<N>-resolution.txt`: what the reviewer flagged, what was fixed, what was rejected and why (one line each).
 
+## Phase 3 — Describe the PR
+
+Once the review loop exits on approval (not on a cap-reached or wedged stop), run `/pr-writeup <pr-number>` to fill the draft PR's description from the repo template, in my voice, grounded only in what was actually done. This is the one and only time the PR body is edited. Skip it if the loop ended without approval — I'll take those over by hand.
+
 ## Exit
 
-- **On approval:** report the final verdict, rounds used, and anything deliberately not addressed (with the reasoning).
+- **On approval:** report the final verdict, rounds used, the PR url with its now-filled description, and anything deliberately not addressed (with the reasoning).
 - **Always:** include the worktree path in the final report and leave the worktree in place — I remove it myself with `wt remove <branch>` after merging.
 - **Cap reached without approval:** stop — do not keep iterating. Summarize the unresolved findings, your position on each, and hand back to me for a decision.
 - **Wedged?** If the same finding survives two consecutive rounds of attempted fixes, or a fix breaks tests you can't repair within the round, stop early and report rather than burning the remaining rounds.
@@ -65,7 +69,7 @@ Track the round counter explicitly: state "round X of N" and the reviewer's verd
 
 - Never merge the PR; never close the ticket; never mark the draft PR ready for review. My job.
 - All work happens in the ticket worktree — never modify the main checkout's working tree, and never run `wt remove` (cleanup is mine too).
-- No public activity beyond branch pushes and opening the PR itself: never comment on the PR, never post reviews, never edit the PR body after creation, never touch the Linear ticket. Agent-to-agent communication happens only through the run-directory `.txt` files.
+- No public activity beyond branch pushes, opening the PR, and the single `/pr-writeup` description pass in Phase 3: never comment on the PR, never post reviews, never mark it ready for review, never touch the Linear ticket. Agent-to-agent communication happens only through the run-directory `.txt` files.
 - Hard cap on reviewer rounds — the argument or the default 5, no exceptions.
 - Every reviewer invocation must be a fresh headless session; never reuse a reviewer session across rounds.
 - The headless reviewer runs with permissions skipped, so the `--disallowedTools "Edit Write NotebookEdit"` guard and the REVIEW ONLY instruction are both mandatory, every round.

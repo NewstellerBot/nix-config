@@ -9,6 +9,11 @@
   home.file.".claude/skills/ticket-loop/SKILL.md".source =
     ../configs/claude/skills/ticket-loop/SKILL.md;
 
+  # /pr-writeup fills a draft PR's description from the repo template, in my voice,
+  # grounded only in what was actually done. ticket-loop calls it before exit.
+  home.file.".claude/skills/pr-writeup/SKILL.md".source =
+    ../configs/claude/skills/pr-writeup/SKILL.md;
+
   # `wt` worktree helper: creates ~/.worktrees/<repo>/<branch>, copies the root
   # .env into it, then runs pnpm install + pnpm sync-env (futre's per-package
   # env distributor) so worktrees start with working env vars. Installed into

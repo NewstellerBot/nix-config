@@ -9,7 +9,7 @@ disable-model-invocation: true
 
 Arguments: `$ARGUMENTS` — the first token is the Linear ticket ID (e.g. `POI-2070`); the optional second token is the maximum number of review rounds (default **5**).
 
-This skill depends on two project skills: `/implement-ticket` and `/review-pr`. If either is missing in the current project, stop immediately and say so instead of improvising.
+This skill depends on two project skills: `/implement-ticket` and `/review-pr`. If either is missing in the current project, stop immediately and say so instead of improvising. It also depends on the `wt` worktree helper being on PATH (`wt create <branch>`) — same rule: stop and say so if it's missing.
 
 ## Recommended harness: pair with /goal
 
@@ -28,18 +28,20 @@ All agent-to-agent communication goes through `.txt` files in `~/.ticket-loop/<t
 
 ## Phase 1 — Implement
 
-1. Run `/implement-ticket <ticket-id>` and complete it fully: discovery, implementation, tests, and the verification checklist.
-2. Work on the branch name Linear provides for the ticket (`gitBranchName` from the issue). Create it from `main` if it doesn't exist.
-3. Commit, push, and open the PR with `gh pr create`.
+1. **Create an isolated worktree — never work in the main checkout.** Fetch the branch name Linear provides for the ticket (`gitBranchName` from the issue), then run `wt create <gitBranchName> --from main` from the repo root. `wt` handles branches that already exist locally or on origin automatically (`--from main` only applies to new branches). The worktree lands at `~/.worktrees/<repo>/<branch>`, with the root `.env` copied in and `pnpm install` + `pnpm sync-env` already run — so env vars and per-package `.env` files are in place from the start; don't re-derive or copy them by hand.
+2. **Everything from here on happens inside the worktree**: implementation, tests, commits, pushes, and every review-round fix. Run commands from the worktree directory, not the original checkout. If file tools can't reach it, add the worktree as an additional working directory before continuing.
+3. Run `/implement-ticket <ticket-id>` and complete it fully: discovery, implementation, tests, and the verification checklist.
+4. Commit, push, and open the PR **as a draft** with `gh pr create --draft`.
    - Title: `<type>: <summary> [<ticket-id>]`, matching recent commit history style.
-   - Body: the repo's PR template, verbatim and unfilled — `gh pr create --body-file .github/PULL_REQUEST_TEMPLATE.md` (empty body if the repo has no template). Never write a description and never fill in or edit the template; I do that myself.
-4. Record the PR number — the loop needs it.
+   - Body: the repo's PR template, verbatim and unfilled — `gh pr create --draft --body-file .github/PULL_REQUEST_TEMPLATE.md` (empty body if the repo has no template). Never write a description and never fill in or edit the template; I do that myself.
+   - Always `--draft`; never open a ready-for-review PR and never mark an existing one ready — that is my call, not yours.
+5. Record the PR number — the loop needs it.
 
 ## Phase 2 — Review loop
 
 Track the round counter explicitly: state "round X of N" and the reviewer's verdict verbatim in your reply text every round — the /goal evaluator judges only what appears in the conversation. For each round, up to the cap:
 
-1. **Spawn an independent reviewer.** Never review your own work in-session; the reviewer must be a fresh headless instance with no shared context:
+1. **Spawn an independent reviewer.** Never review your own work in-session; the reviewer must be a fresh headless instance with no shared context. Launch it with the worktree as its working directory so the project's `/review-pr` skill resolves:
    - Write the reviewer prompt to `~/.ticket-loop/<ticket-id>/round-<N>-prompt.txt` for clean quoting. The prompt is: `/review-pr <pr-number>`, plus these instructions — "REVIEW ONLY: do not modify, create, or delete files; do not commit or push; do not comment on the PR. End with a verdict line — exactly one of: approve, approve-with-nits, request-changes — followed by prioritized findings, each with severity (blocker / should-fix / nit) and file:line."
    - Run it in the background and wait for completion:
      `claude --dangerously-skip-permissions -p "$(cat ~/.ticket-loop/<ticket-id>/round-<N>-prompt.txt)" --disallowedTools "Edit Write NotebookEdit" > ~/.ticket-loop/<ticket-id>/round-<N>-review.txt 2>&1`
@@ -55,12 +57,14 @@ Track the round counter explicitly: state "round X of N" and the reviewer's verd
 ## Exit
 
 - **On approval:** report the final verdict, rounds used, and anything deliberately not addressed (with the reasoning).
+- **Always:** include the worktree path in the final report and leave the worktree in place — I remove it myself with `wt remove <branch>` after merging.
 - **Cap reached without approval:** stop — do not keep iterating. Summarize the unresolved findings, your position on each, and hand back to me for a decision.
 - **Wedged?** If the same finding survives two consecutive rounds of attempted fixes, or a fix breaks tests you can't repair within the round, stop early and report rather than burning the remaining rounds.
 
 ## Guardrails
 
-- Never merge the PR; never close the ticket. My job.
+- Never merge the PR; never close the ticket; never mark the draft PR ready for review. My job.
+- All work happens in the ticket worktree — never modify the main checkout's working tree, and never run `wt remove` (cleanup is mine too).
 - No public activity beyond branch pushes and opening the PR itself: never comment on the PR, never post reviews, never edit the PR body after creation, never touch the Linear ticket. Agent-to-agent communication happens only through the run-directory `.txt` files.
 - Hard cap on reviewer rounds — the argument or the default 5, no exceptions.
 - Every reviewer invocation must be a fresh headless session; never reuse a reviewer session across rounds.

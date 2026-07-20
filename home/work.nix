@@ -19,6 +19,13 @@
     executable = true;
   };
 
+  # Doppler CLI (work secrets manager). From nixpkgs, not the dopplerhq/cli
+  # brew tap — taps are pinned via nix-homebrew (mutableTaps = false) and
+  # homebrew.nix applies to both hosts, so brew would leak this to personal.
+  # The nix binary is read-only, so `doppler update` can't self-update;
+  # updates come from `nix flake update` like everything else.
+  home.packages = [ pkgs.doppler ];
+
   my.claude = {
     extraPlugins = [
       "slack@claude-plugins-official"

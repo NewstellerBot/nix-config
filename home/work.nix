@@ -48,6 +48,11 @@
         command = "npx";
         args = [ "-y" "@playwright/mcp@latest" ];
       };
+      # Sentry hosted MCP (OAuth — authenticate once via /mcp in Claude Code)
+      sentry = {
+        transport = "http";
+        url = "https://mcp.sentry.dev/mcp";
+      };
     };
   };
 }

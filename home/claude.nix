@@ -22,7 +22,7 @@ let
   # Every MCP server name ever managed on ANY host. All are removed before the
   # declared ones are re-added, so a host that drops a server converges.
   # When a host gains a new server, add its name here too.
-  managedMcpNames = [ "figma" "playwright" ];
+  managedMcpNames = [ "figma" "playwright" "sentry" ];
 
   pluginInstalls = lib.concatMapStrings (plugin:
     "$claude plugin install ${lib.escapeShellArg plugin} 2>/dev/null || true\n"

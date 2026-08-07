@@ -29,7 +29,11 @@
   # homebrew.nix applies to both hosts, so brew would leak this to personal.
   # The nix binary is read-only, so `doppler update` can't self-update;
   # updates come from `nix flake update` like everything else.
-  home.packages = [ pkgs.doppler ];
+  #
+  # CocoaPods: `expo run:ios` shells out to `pod install` when building the
+  # futre mobile app's native project. Work-only for the same reason as
+  # doppler above.
+  home.packages = [ pkgs.doppler pkgs.cocoapods ];
 
   my.claude = {
     extraPlugins = [

@@ -19,4 +19,16 @@
   # Requires an active Mac App Store sign-in — nix-darwin puts pkgs.mas on PATH
   # for `brew bundle` but cannot authenticate on your behalf.
   homebrew.masApps.Xcode = 497799835;
+
+  # Android Studio, for the futre mobile app's Android side. nixpkgs marks
+  # android-studio x86_64-linux only, so the cask is the route on darwin; it is
+  # present in the pinned homebrew-cask input, so mutableTaps = false is fine.
+  #
+  # Here rather than modules/homebrew.nix for the same reason as Xcode above:
+  # that module applies to both hosts and this is work-only.
+  #
+  # Only needed to run and verify Android locally — EAS builds it in the cloud.
+  # Brings its own JetBrains Runtime, which is currently the machine's only JDK;
+  # Gradle finds it via JAVA_HOME (see home/work.nix).
+  homebrew.casks = [ "android-studio" ];
 }

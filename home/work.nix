@@ -1,6 +1,6 @@
 # Work machine: slack/linear plugins (each bundles its own MCP server) plus
 # standalone MCP servers. Linear MCP comes from the plugin — no separate server.
-{ pkgs, ... }: {
+{ config, pkgs, ... }: {
   imports = [ ./default.nix ];
 
   # Work-only Claude Code skill: /ticket-loop orchestrates implement-ticket →
@@ -33,7 +33,21 @@
   # CocoaPods: `expo run:ios` shells out to `pod install` when building the
   # futre mobile app's native project. Work-only for the same reason as
   # doppler above.
-  home.packages = [ pkgs.doppler pkgs.cocoapods ];
+  #
+  # android-tools: adb and fastboot. Android Studio ships its own copies under
+  # ~/Library/Android/sdk/platform-tools, which is not on PATH; this puts them
+  # there without depending on where Studio put its SDK.
+  home.packages = [ pkgs.doppler pkgs.cocoapods pkgs.android-tools ];
+
+  # `expo run:android` resolves the SDK through ANDROID_HOME. This is Studio's
+  # default SDK location — set after installing it, so it exists before anything
+  # reads this. JAVA_HOME is deliberately not set here: Studio's bundled
+  # JetBrains Runtime is the only JDK on this machine, and its path moves
+  # between Studio versions, so point it at the real one once and revisit if
+  # Gradle stops finding a JDK.
+  home.sessionVariables = {
+    ANDROID_HOME = "${config.home.homeDirectory}/Library/Android/sdk";
+  };
 
   my.claude = {
     extraPlugins = [

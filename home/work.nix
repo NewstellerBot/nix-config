@@ -39,14 +39,15 @@
   # there without depending on where Studio put its SDK.
   home.packages = [ pkgs.doppler pkgs.cocoapods pkgs.android-tools ];
 
-  # `expo run:android` resolves the SDK through ANDROID_HOME. This is Studio's
-  # default SDK location — set after installing it, so it exists before anything
-  # reads this. JAVA_HOME is deliberately not set here: Studio's bundled
-  # JetBrains Runtime is the only JDK on this machine, and its path moves
-  # between Studio versions, so point it at the real one once and revisit if
-  # Gradle stops finding a JDK.
+  # `expo run:android` resolves the SDK through ANDROID_HOME and needs a JDK on
+  # JAVA_HOME for Gradle. Both point at what Android Studio installed: its
+  # default SDK location, and its bundled JetBrains Runtime (currently 21),
+  # which is the only JDK on this machine. Using Studio's own JDK keeps Gradle
+  # on the same runtime the IDE builds with; swap in pkgs.jdk17 if a version
+  # mismatch ever shows up.
   home.sessionVariables = {
     ANDROID_HOME = "${config.home.homeDirectory}/Library/Android/sdk";
+    JAVA_HOME = "/Applications/Android Studio.app/Contents/jbr/Contents/Home";
   };
 
   my.claude = {

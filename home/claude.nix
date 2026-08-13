@@ -106,7 +106,7 @@ When researching try using industry blog posts, reddit, and research papers rath
           "Grep"
         ];
       };
-      model = "claude-opus";
+      model = "claude-opus-5";
       # model = "claude-opus-4-8[1m]";
       effortLevel = "xhigh";
       # ultracode = true;

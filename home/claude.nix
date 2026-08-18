@@ -96,6 +96,11 @@ Think carefully and step-by-step before responding; assume the problem is harder
 When researching try using industry blog posts, reddit, and research papers rather than shallow marketing websites. We want to know what actual people use, say, etc rather than what companies promise.
     '';
 
+    # Custom subagents for the Agent tool. Managed per-file (not the whole
+    # agents/ dir) so ad-hoc agents can still be created outside nix.
+    home.file.".claude/agents/ruthless-reviewer.md".source =
+      ../configs/claude/agents/ruthless-reviewer.md;
+
     # Claude Code settings (installed via native installer, not nixpkgs)
     home.file.".claude/settings.json".text = builtins.toJSON {
       permissions = {
